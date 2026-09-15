@@ -17,12 +17,12 @@ check_requirements() {
     
     local missing=()
     
-    if ! command -v docker &> /dev/null; then
-        missing+=("docker")
+    if ! command -v podman &> /dev/null; then
+        missing+=("podman")
     fi
     
-    if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
-        missing+=("docker-compose")
+    if ! command -v podman-compose &> /dev/null && ! docker compose version &> /dev/null; then
+        missing+=("podman-compose")
     fi
     
     if ! command -v openssl &> /dev/null; then
@@ -43,16 +43,16 @@ create_directories() {
     echo "Creating directory structure..."
     
     local dirs=(
-        "/var/lib/github-archive/json"
-        "/var/lib/github-archive/postgres"
-        "/var/lib/github-archive/postgres-primary"
-        "/var/lib/github-archive/postgres-replica"
+        "/nbhome/Halle.Derry/lib/github-archive/json"
+        "/nbhome/Halle.Derry/lib/github-archive/postgres"
+        "/nbhome/Halle.Derry/lib/github-archive/postgres-primary"
+        "/nbhome/Halle.Derry/lib/github-archive/postgres-replica"
     )
     
     for dir in "${dirs[@]}"; do
         if [ ! -d "$dir" ]; then
-            sudo mkdir -p "$dir"
-            sudo chown -R 1000:1000 "$dir"
+            mkdir -p "$dir"
+            #sudo chown -R 1000:1000 "$dir"
             echo "  Created: $dir"
         else
             echo "  Exists: $dir"
