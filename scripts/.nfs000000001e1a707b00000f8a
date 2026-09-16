@@ -12,7 +12,6 @@ echo "Fetching GitHub webhook IP ranges..."
 # Fetch from GitHub API
 IPS=$(curl -s https://api.github.com/meta | jq -r '.hooks[] | "          - \"" + . + "\""')
 
-
 if [ -z "$IPS" ]; then
     echo "ERROR: Could not fetch GitHub IPs"
     exit 1
